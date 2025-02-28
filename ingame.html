@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Challenge - TECHNOTITANS</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('insurance-bg.jpg'); /* Replace with your image */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .challenge-container {
+            width: 60%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #e64a19;
+        }
+        .progress-container {
+            margin-top: 15px;
+            width: 80%;
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            height: 20px;
+            position: relative;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #4caf50;
+            transition: width 0.5s;
+        }
+        .nav-links {
+            margin-top: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin: 10px;
+            padding: 10px 20px;
+            background: #007bff;
+            border-radius: 5px;
+        }
+        .nav-links a:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="challenge-container">
+        <h2>Insurance Management Challenge</h2>
+        <p>Complete tasks to improve your insurance planning and risk management!</p>
+        <button class="btn" onclick="generateChallenge()">Get a Challenge</button>
+        <p id="challengeText"></p>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <p id="progressText">Progress: 0%</p>
+    </div>
+    
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+    </div>
+
+    <script>
+        const challenges = [
+            "Review your current insurance policies and check if they meet your needs.",
+            "Compare different health insurance plans to find the best coverage at a lower cost.",
+            "Increase your emergency fund by ₹1000 to prepare for unexpected expenses.",
+            "Check if you have life insurance that covers at least 10 times your annual income.",
+            "Understand the difference between term and whole life insurance and choose wisely."
+        ];
+        
+        let progress = 0;
+        
+        function generateChallenge() {
+            const randomIndex = Math.floor(Math.random() * challenges.length);
+            document.getElementById("challengeText").innerText = challenges[randomIndex];
+            updateProgress();
+        }
+        
+        function updateProgress() {
+            if (progress < 100) {
+                progress += 20;
+                document.getElementById("progressBar").style.width = progress + "%";
+                document.getElementById("progressText").innerText = "Progress: " + progress + "%";
+            }
+        }
+    </script>
+</body>
+</html>

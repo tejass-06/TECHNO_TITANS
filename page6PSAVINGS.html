@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BudgetBuddy - Smart Savings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(-45deg, #4CAF50, #2E7D32, #2196F3, #1565C0);
+            background-size: 400% 400%;
+            animation: gradient 5s ease infinite;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .navbar {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+
+        .navbar-logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-links {
+            margin-right: 20px;
+        }
+
+        .navbar-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .container {
+            margin-top: 50px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            width: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        input, button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #ff9800;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #e68900;
+        }
+
+        .savings-suggestions {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f8f8;
+            border-radius: 10px;
+        }
+
+        .editable {
+            background: #fff3e0;
+            border: 1px dashed #ff9800;
+            padding: 10px;
+            cursor: text;
+        }
+
+        .expense-list {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            text-align: left;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-logo">
+            <img src="BBlogo.png" alt="Logo">
+            <span style="color: white; font-size: 20px; font-weight: bold;">BudgetBuddy</span>
+        </div>
+        <div class="navbar-links">
+            <a href="page3MAIN.html">Home</a>
+            <a href="page14CHALLENGE.html">CHALLENGE</a>
+            <a href="page13UPROFILE.html">MY PROFILE</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Enter Your Monthly Budget & Expenses</h2>
+        <input type="number" id="income" placeholder="Enter Monthly Income">
+        <input type="number" id="expenses" placeholder="Enter Total Monthly Expenses">
+        <button onclick="calculateSavings()">Calculate Savings</button>
+
+        <h3>Add Expense Details</h3>
+        <input type="text" id="expense-name" placeholder="Expense Name">
+        <input type="number" id="expense-amount" placeholder="Amount">
+        <button onclick="addExpense()">Add Expense</button>
+
+        <div class="expense-list">
+            <h3>Expense Details</h3>
+            <ul id="expense-list"></ul>
+        </div>
+
+        <div class="savings-suggestions">
+            <h3>Savings Suggestions</h3>
+            <p id="suggestion" class="editable" contenteditable="true">Your savings insights will appear here...</p>
+        </div>
+    </div>
+
+    <script>
+        function calculateSavings() {
+            let income = parseFloat(document.getElementById("income").value);
+            let expenses = parseFloat(document.getElementById("expenses").value);
+            let savings = income - expenses;
+
+            let suggestionText = "";
+            if (savings < 0) {
+                suggestionText = "You're spending more than you earn! Consider cutting down unnecessary expenses. Try meal planning, using public transport, or reducing impulse purchases.";
+            } else if (savings < income * 0.2) {
+                suggestionText = "You're saving less than 20% of your income. Try setting a monthly savings goal, automating savings transfers, or reviewing subscriptions you don't use.";
+            } else {
+                suggestionText = "Great job! You're saving a healthy portion of your income. Consider investing in low-risk mutual funds or a high-yield savings account to grow your savings further.";
+            }
+
+            document.getElementById("suggestion").textContent = suggestionText;
+        }
+
+        function addExpense() {
+            let name = document.getElementById("expense-name").value;
+            let amount = parseFloat(document.getElementById("expense-amount").value);
+            if (name && amount) {
+                let listItem = document.createElement("li");
+                listItem.textContent = `${name}: $${amount}`;
+                document.getElementById("expense-list").appendChild(listItem);
+                document.getElementById("expense-name").value = "";
+                document.getElementById("expense-amount").value = "";
+            }
+        }
+    </script>
+</body>
+</html>

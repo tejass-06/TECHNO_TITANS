@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savings Challenge - TECHNOTITANS</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('savings-bg.jpg'); /* Replace with your image */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .challenge-container {
+            width: 60%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #218838;
+        }
+        .nav-links {
+            margin-top: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin: 10px;
+            padding: 10px 20px;
+            background: #007bff;
+            border-radius: 5px;
+        }
+        .nav-links a:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="challenge-container">
+        <h2>Savings Challenge</h2>
+        <p>Take on daily challenges to improve your saving habits!</p>
+        <button class="btn" onclick="generateChallenge()">Get a Challenge</button>
+        <p id="challengeText"></p>
+    </div>
+    
+    <div class="nav-links">
+        <a href="page3MAIN.html">Home</a>
+    </div>
+
+    <script>
+        const challenges = [
+            "Save ₹100 today by skipping your coffee shop visit!",
+            "Put aside 10% of any income you receive today.",
+            "Limit your online shopping for a week and save the difference!",
+            "Try a no-spend day challenge today!",
+            "Sell one unused item and save the earnings!"
+        ];
+        
+        function generateChallenge() {
+            const randomIndex = Math.floor(Math.random() * challenges.length);
+            document.getElementById("challengeText").innerText = challenges[randomIndex];
+        }
+    </script>
+</body>
+</html>

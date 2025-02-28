@@ -33,7 +33,7 @@
         button:hover {
             background-color: #01baef;
         }
-        input {
+        input, select {
             width: calc(100% - 22px);
             padding: 8px;
             margin-top: 10px;
@@ -65,32 +65,10 @@
             background-color: red;
             margin-top: 10px;
         }
-        .back-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-        .back-button:hover {
-            background-color: #0056b3;
-        }
-        .back-button span {
-            margin-left: 5px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <button class="back-button" onclick="openBackPopup()">← Back</button>
-        
         <h2>Pay Your Bills</h2>
         <p>Select an expense and click "Pay Now" to mark it as paid.</p>
         
@@ -101,6 +79,14 @@
         <h3>Add New Expense</h3>
         <input type="text" id="expenseName" placeholder="Expense Name">
         <input type="number" id="expenseAmount" placeholder="Amount">
+        <input type="text" id="bankDetails" placeholder="Bank Details">
+        <select id="paymentMethod">
+            <option value="Credit Card">Credit Card</option>
+            <option value="Debit Card">Debit Card</option>
+            <option value="Net Banking">Net Banking</option>
+            <option value="UPI">UPI</option>
+            <option value="Cash">Cash</option>
+        </select>
         <button onclick="addExpense()">Add Expense</button>
     </div>
     
@@ -109,14 +95,6 @@
             <p id="popupText"></p>
             <button onclick="confirmPayment()">Confirm Payment</button>
             <button class="close-btn" onclick="closePopup()">Cancel</button>
-        </div>
-    </div>
-    
-    <div class="popup" id="backPopup">
-        <div class="popup-content">
-            <p>Are you sure you want to go back? Any unsaved changes will be lost.</p>
-            <button onclick="goBack()">Yes, Go Back</button>
-            <button class="close-btn" onclick="closeBackPopup()">Cancel</button>
         </div>
     </div>
 
@@ -143,19 +121,6 @@
             document.getElementById("popup").style.display = "none";
         }
 
-        function openBackPopup() {
-            document.getElementById("backPopup").style.display = "flex";
-        }
-
-        function closeBackPopup() {
-            document.getElementById("backPopup").style.display = "none";
-        }
-
-        function goBack() {
-            // Replace this with the URL of your previous page
-            window.location.href = "page3MAIN.html ";
-        }
-
         function confirmPayment() {
             let select = document.getElementById("expenseSelect");
             let selectedOption = select.options[select.selectedIndex].text;
@@ -177,34 +142,45 @@
         function addExpense() {
             let name = document.getElementById("expenseName").value;
             let amount = document.getElementById("expenseAmount").value;
-            if (!name || !amount) {
-                alert("Please enter both name and amount");
+            let bankDetails = document.getElementById("bankDetails").value;
+            let paymentMethod = document.getElementById("paymentMethod").value;
+
+            if (!name || !amount || !bankDetails || !paymentMethod) {
+                alert("Please enter all details");
                 return;
             }
 
             let select = document.getElementById("expenseSelect");
             let option = document.createElement("option");
             option.value = name;
-            option.text = `${name} - Rs. ${amount}`;
+            option.text = `${name} - Rs. ${amount} | ${bankDetails} | ${paymentMethod}`;
             select.appendChild(option);
+            
+            // Store expense details in localStorage
+            let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+            expenses.push({ name, amount, bankDetails, paymentMethod });
+            localStorage.setItem("expenses", JSON.stringify(expenses));
+
+            alert("Expense added successfully!");
         }
 
         function displayExpenses() {
             let select = document.getElementById("expenseSelect");
             select.innerHTML = "";
-            let payments = JSON.parse(localStorage.getItem('payments')) || [];
-            let expenses = [
-                { name: "BUS FEE", amount: 2500 },
-                { name: "COLLEGE FEE", amount: 1500 },
-                { name: "Internet", amount: 1000 }
+            let expenses = JSON.parse(localStorage.getItem("expenses")) || [
+                { name: "BUS FEE", amount: 2500, bankDetails: "SBI Bank", paymentMethod: "UPI" },
+                { name: "COLLEGE FEE", amount: 1500, bankDetails: "HDFC Bank", paymentMethod: "Net Banking" },
+                { name: "Internet", amount: 1000, bankDetails: "ICICI Bank", paymentMethod: "Credit Card" }
             ];
 
             expenses.forEach(expense => {
                 let option = document.createElement("option");
                 option.value = expense.name;
-                option.text = `${expense.name} - Rs. ${expense.amount}`;
+                option.text = `${expense.name} - Rs. ${expense.amount} | ${expense.bankDetails} | ${expense.paymentMethod}`;
                 select.appendChild(option);
             });
+
+            localStorage.setItem("expenses", JSON.stringify(expenses));
         }
     </script>
 </body>

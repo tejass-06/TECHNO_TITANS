@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Management Challenge - TECHNOTITANS</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('expenses-bg.jpg'); /* Replace with your image */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .challenge-container {
+            width: 60%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #e68900;
+        }
+        .score-container {
+            margin-top: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .nav-links {
+            margin-top: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin: 10px;
+            padding: 10px 20px;
+            background: #007bff;
+            border-radius: 5px;
+        }
+        .nav-links a:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="challenge-container">
+        <h2>Expense Management Challenge</h2>
+        <p>Improve your spending habits with daily challenges!</p>
+        <button class="btn" onclick="generateChallenge()">Get a Challenge</button>
+        <p id="challengeText"></p>
+        <div class="score-container">
+            Score: <span id="score">0</span>
+        </div>
+    </div>
+    
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+    </div>
+
+    <script>
+        const challenges = [
+            "Track all your expenses for today and identify unnecessary spending!",
+            "Limit dining out for the next 3 days and cook at home!",
+            "Save ₹200 today by skipping unnecessary purchases!",
+            "Cancel one unused subscription and save money!",
+            "Try a 'No Spend Day' challenge today!"
+        ];
+        let score = 0;
+        
+        function generateChallenge() {
+            const randomIndex = Math.floor(Math.random() * challenges.length);
+            document.getElementById("challengeText").innerText = challenges[randomIndex];
+            updateScore();
+        }
+        
+        function updateScore() {
+            score += 10;
+            document.getElementById("score").innerText = score;
+        }
+    </script>
+</body>
+</html>

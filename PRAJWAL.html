@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Login Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        body {
+            background-image: url('loginbg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+        }
+        h1, h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .forgot-password {
+            text-align: right;
+            margin-top: 10px;
+        }
+        .forgot-password a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .login-btn, .create-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        .login-btn:hover, .create-btn:hover {
+            background-color: #2980b9;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            max-width: 400px;
+            text-align: center;
+        }
+        .popup .close-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container glass-card">
+            <h1>Welcome to Smart Transport</h1>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-btn">Log In</button>
+                <button type="button" class="create-btn" onclick="showPopup()">Create Account</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="createProfilePopup" class="popup">
+        <h2>Create Profile</h2>
+        <form>
+            <div class="form-group">
+                <label for="newEmail">Email</label>
+                <input type="email" id="newEmail" name="newEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="newPassword">Password</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+            </div>
+            <button type="submit" class="login-btn">Sign Up</button>
+            <button type="button" class="close-btn" onclick="closePopup()">Close</button>
+        </form>
+    </div>
+    
+    <footer>
+        <h3>About Us</h3>
+        <p>@Hack Titans Pvt Ltd 2025</p>
+    </footer>
+
+    <script>
+        function showPopup() {
+            document.getElementById("createProfilePopup").style.display = "block";
+        }
+        function closePopup() {
+            document.getElementById("createProfilePopup").style.display = "none";
+        }
+    </script>
+</body>
+</html>

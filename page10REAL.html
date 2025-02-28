@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Real Estate Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(-45deg, #FF9933, #FFFFFF, #138808, #FFFFFF);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin: 0 15px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #FF9933;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 20px;
+        }
+        
+        .hero {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .property-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .property-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .card-content p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .details-table {
+            width: 100%;
+            margin-bottom: 15px;
+            border-collapse: collapse;
+        }
+        
+        .details-table th, .details-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .details-table th {
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .details-table td {
+            color: #666;
+        }
+        
+        .request-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #FF9933;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .request-btn:hover {
+            background-color: #e88a2a;
+        }
+        
+        .footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            color: #FF9933;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .modal h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .modal p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .location-badge {
+            display: inline-block;
+            background-color: #138808;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar with Logo -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="BBlogo.png" alt="Indian Real Estate Solutions Logo">
+            <h1>Indian Real Estate Solutions</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="properties.html">Properties</a></li>
+            <li><a href="#" id="about-link">About</a></li>
+            <li><a href="#" id="contact-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>Find Your Dream Property in India</h2>
+            <p>Discover premium properties across major Indian cities. We partner with top developers and property owners to bring you the best real estate options for residential and commercial needs.</p>
+        </section>
+
+        <!-- Property Grid -->
+        <div class="property-grid">
+            <!-- Property Card 1 -->
+            <div class="property-card">
+                <img src="F1.jpg" alt="Prestige Developers">
+                <div class="card-content">
+                    <span class="location-badge">Mumbai</span>
+                    <h3>Prestige Developers</h3>
+                    <p>Luxury apartments and villas in prime locations with world-class amenities.</p>
+                    <table class="details-table">
+                        <tr>
+                            <th>Property Types</th>
+                            <td>Apartments, Villas</td>
+                        </tr>
+                        <tr>
+                            <th>Price Range</th>
+                            <td>₹1.2 Cr - ₹20 Cr</td>
+                        </tr>
+                        <tr>
+                            <th>Locations</th>
+                            <td>Mumbai, Bangalore, Delhi</td>
+                        </tr>
+                        <tr>
+                            <th>Possession</th>
+                            <td>Ready to Move & Under Construction</td>
+                        </tr>
+                        <tr>
+                            <th>Experience</th>
+                            <td>25+ years in real estate</td>
+                        </tr>
+                    </table>
+                    <button class="request-btn">Request</button>
+                </div>
+            </div>
+
+            <!-- Property Card 2 -->
+            <div class="property-card">
+                <img src="F2.jpg" alt="DLF Properties">
+                <div class="card-content">
+                    <span class="location-badge">Delhi NCR</span>
+                    <h3>DLF Properties</h3>
+                    <p>Premium residential and commercial spaces in Delhi NCR region.</p>
+                    <table class="details-table">
+                        <tr>
+                            <th>Property Types</th>
+                            <td>Apartments, Commercial</td>
+                        </tr>
+                        <tr>
+                            <th>Price Range</th>
+                            <td>₹80 Lakh - ₹15 Cr</td>
+                        </tr>
+                        <tr>
+                            <th>Locations</th>
+                            <td>Delhi, Gurgaon, Noida</td>
+                        </tr>
+                        <tr>
+                            <th>Possession</th>
+                            <td>Ready to Move & Under Construction</td>
+                        </tr>
+                        <tr>
+                            <th>Experience</th>
+                            <td>70+ years in real estate</td>
+                        </tr>
+                    </table>
+                    <button class="request-btn">Request</button>
+                </div>
+            </div>
+
+            <!-- Property Card 3 -->
+            <div class="property-card">
+                <img src="F3.jpg" alt="Lodha Group">
+                <div class="card-content">
+                    <span class="location-badge">Mumbai</span>
+                    <h3>Lodha Group</h3>
+                    <p>Luxury residential projects with state-of-the-art amenities in Mumbai.</p>
+                    <table class="details-table">
+                        <tr>
+                            <th>Property Types</th>
+                            <td>Apartments, Penthouses</td>
+                        </tr>
+                        <tr>
+                            <th>Price Range</th>
+                            <td>₹1 Cr - ₹30 Cr</td>
+                        </tr>
+                        <tr>
+                            <th>Locations</th>
+                            <td>Mumbai, Pune, London</td>
+                        </tr>
+                        <tr>
+                            <th>Possession</th>
+                            <td>Ready to Move & Under Construction</td>
+                        </tr>
+                        <tr>
+                            <th>Experience</th>
+                            <td>40+ years in real estate</td>
+                        </tr>
+                    </table>
+                    <button class="request-btn">Request</button>
+                </div>
+            </div>
+
+            <!-- Property Card 4 -->
+            <div class="property-card">
+                <img src="F4.jpg" alt="Brigade Group">
+                <div class="card-content">
+                    <span class="location-badge">Bangalore</span>
+                    <h3>Brigade Group</h3>
+                    <p>Residential and commercial properties in prime Bangalore locations.</p>
+                    <table class="details-table">
+                        <tr>
+                            <th>Property Types</th>
+                            <td>Apartments, Villas, Office Spaces</td>
+                        </tr>
+                        <tr>
+                            <th>Price Range</th>
+                            <td>₹60 Lakh - ₹10 Cr</td>
+                        </tr>
+                        <tr>
+                            <th>Locations</th>
+                            <td>Bangalore, Mysore, Chennai</td>
+                        </tr>
+                        <tr>
+                            <th>Possession</th>
+                            <td>Ready to Move & Under Construction</td>
+                        </tr>
+                        <tr>
+                            <th>Experience</th>
+                            <td>30+ years in real estate</td>
+                        </tr>
+                    </table>
+                    <button class="request-btn">Request</button>
+                </div>
+            </div>
+
+            <!-- Property Card 5 -->
+            <div class="property-card">
+                <img src="F5.jpg" alt="Godrej Properties">
+                <div class="card-content">
+                    <span class="location-badge">Pan India</span>
+                    <h3>Godrej Properties</h3>
+                    <p>Thoughtfully designed residential projects across major Indian cities.</p>
+                    <table class="details-table">
+                        <tr>
+                            <th>Property Types</th>
+                            <td>Apartments, Villas, Townships</td>
+                        </tr>
+                        <tr>
+                            <th>Price Range</th>
+                            <td>₹50 Lakh - ₹8 Cr</td>
+                        </tr>
+                        <tr>
+                            <th>Locations</th>
+                            <td>Mumbai, Pune, Bangalore, Delhi NCR</td>
+                        </tr>
+                        <tr>
+                            <th>Possession</th>
+                            <td>Ready to Move & Under Construction</td>
+                        </tr>
+                        <tr>
+                            <th>Experience</th>
+                            <td>35+ years in real estate</td>
+                        </tr>
+                    </table>
+                    <button class="request-btn">Request</button>
+                </div>
+            </div>
+
+            <!-- Property Card 6 -->
+            <div class="property-card">
+                <img src="F6.jpg" alt="Sobha Limited">
+                <div class="card-content">
+                    <span class="location-badge">Bangalore</span>
+                    <h3>Sobha Limited</h3>
+                    <p>Premium residential properties with exceptional quality and craftsmanship.</p>
+                    <table class="details-table">
+                        <tr>
+                            <th>Property Types</th>
+                            <td>Apartments, Villas, Row Houses</td>
+                        </tr>
+                        <tr>
+                            <th>Price Range</th>
+                            <td>₹70 Lakh - ₹12 Cr</td>
+                        </tr>
+                        <tr>
+                            <th>Locations</th>
+                            <td>Bangalore, Chennai, Kochi</td>
+                        </tr>
+                        <tr>
+                            <th>Possession</th>
+                            <td>Ready to Move & Under Construction</td>
+                        </tr>
+                        <tr>
+                            <th>Experience</th>
+                            <td>25+ years in real estate</td>
+                        </tr>
+                    </table>
+                    <button class="request-btn">Request</button>
+                </div>
+            </div>
+
+            <!-- Property Card 7 -->
+            <div class="property-card">
+                <img src="F7.jpg" alt="Hiranandani Group">
+                <div class="card-content">
+                    <span class="location-badge">Mumbai</span>
+                    <h3>Hiranandani Group</h3>
+                    <p>Integrated township projects with world-class infrastructure.</p>
+                    <table class="details-table">
+                        <tr>
+                            <th>Property Types</th>
+                            <td>Apartments, Penthouses, Townships</td>
+                        </tr>
+                        <tr>
+                            <th>Price Range</th>
+                            <td>₹1.5 Cr - ₹25 Cr</td>
+                        </tr>
+                        <tr>
+                            <th>Locations</th>
+                            <td>Mumbai, Chennai, Hyderabad</td>
+                        </tr>
+                        <tr>
+                            <th>Possession</th>
+                            <td>Ready to Move & Under Construction</td>
+                        </tr>
+                        <tr>
+                            <th>Experience</th>
+                            <td>40+ years in real estate</td>
+                        </tr>
+                    </table>
+                    <button class="request-btn">Request</button>
+                </div>
+            </div>
+
+            <!-- Property Card 8 -->
+            <div class="property-card">
+                <img src="F8.jpg" alt="Puravankara">
+                <div class="card-content">
+                    <span class="location-badge">Bangalore</span>
+                    <h3>Puravankara</h3>
+                    <p>Luxury and affordable housing projects with modern amenities.</p>
+                    <table class="details-table">
+                        <tr>
+                            <th>Property Types</th>
+                            <td>Apartments, Villas, Plots</td>
+                        </tr>
+                        <tr>
+                            <th>Price Range</th>
+                            <td>₹45 Lakh - ₹5 Cr</td>
+                        </tr>
+                        <tr>
+                            <th>Locations</th>
+                            <td>Bangalore, Chennai, Mumbai</td>
+                        </tr>
+                        <tr>
+                            <th>Possession</th>
+                            <td>Ready to Move & Under Construction</td>
+                        </tr>
+                        <tr>
+                            <th>Experience</th>
+                            <td>45+ years in real estate</td>
+                        </tr>
+                    </table>
+                    <button class="request-btn">Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>© 2025 BUDGETBUDDY. All rights reserved.</p>
+        <p>Privacy Policy | Terms of Service | Disclaimer</p>
+        <div class="social-links">
+            <a href="#">FB</a>
+            <a href="#">IG</a>
+            <a href="#">TW</a>
+            <a href="#">LI</a>
+        </div>
+    </footer>
+
+    <!-- Modal Pop-up -->
+    <div id="requestModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Request Submitted!</h3>
+            <p>Thank you for your interest. One of our property consultants will contact you shortly with all the details.</p>
+            <button class="request-btn">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        const modal = document.getElementById('requestModal');
+        const requestButtons = document.querySelectorAll('.request-btn');
+        const closeModal = document.querySelector('.close-modal');
+        const modalCloseButton = document.querySelector('.modal-content .request-btn');
+
+        // Open modal when request buttons are clicked
+        requestButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                modal.style.display = 'block';
+            });
+        });
+
+        // Close modal when close button or X is clicked
+        modalCloseButton.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // About and Contact links functionality (for demo)
+        document.getElementById('about-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('About page would open here');
+        });
+
+        document.getElementById('contact-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Contact page would open here');
+        });
+    </script>
+</body>
+</html>

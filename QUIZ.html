@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Finance Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f9fb;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff5722;
+        }
+        .question {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .choices {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .choice {
+            background-color: #ff5722;
+            color: white;
+            font-size: 1.2em;
+            padding: 15px;
+            margin: 10px 0;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .choice:hover {
+            background-color: #e64a19;
+        }
+        .hidden {
+            display: none;
+        }
+        #score {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+        #restartBtn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #ff5722;
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #restartBtn:hover {
+            background-color: #e64a19;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Indian Finance Quiz Game</h1>
+        <div id="quiz">
+            <div class="question" id="questionText">What is the capital of India?</div>
+            <div class="choices">
+                <button class="choice" onclick="answerQuestion(0)">New Delhi</button>
+                <button class="choice" onclick="answerQuestion(1)">Mumbai</button>
+                <button class="choice" onclick="answerQuestion(2)">Bangalore</button>
+                <button class="choice" onclick="answerQuestion(3)">Chennai</button>
+            </div>
+        </div>
+        <div id="score" class="hidden"></div>
+        <button id="restartBtn" class="hidden" onclick="restartGame()">Play Again</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the capital of India?",
+                choices: ["New Delhi", "Mumbai", "Bangalore", "Chennai"],
+                correct: 0
+            },
+            {
+                question: "Which Indian company is listed in the New York Stock Exchange (NYSE)?",
+                choices: ["Tata Consultancy Services", "Reliance Industries", "Infosys", "Wipro"],
+                correct: 0
+            },
+            {
+                question: "Which Indian bank introduced the concept of 'Digital Banking'?",
+                choices: ["HDFC Bank", "State Bank of India", "ICICI Bank", "Axis Bank"],
+                correct: 1
+            },
+            {
+                question: "What is the full form of GST in India?",
+                choices: ["Goods and Services Tax", "General Sales Tax", "Global Services Tax", "Gross Sales Tax"],
+                correct: 0
+            },
+            {
+                question: "Which of these is the largest stock exchange in India?",
+                choices: ["NSE", "BSE", "MCX", "Nifty"],
+                correct: 1
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function showQuestion() {
+            const question = questions[currentQuestionIndex];
+            document.getElementById("questionText").textContent = question.question;
+            const buttons = document.querySelectorAll(".choice");
+            buttons.forEach((button, index) => {
+                button.textContent = question.choices[index];
+            });
+        }
+
+        function answerQuestion(choiceIndex) {
+            const question = questions[currentQuestionIndex];
+            if (choiceIndex === question.correct) {
+                score++;
+            }
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById("quiz").classList.add("hidden");
+            const resultMessage = `You scored ${score} out of ${questions.length}`;
+            document.getElementById("score").textContent = resultMessage;
+            document.getElementById("score").classList.remove("hidden");
+            document.getElementById("restartBtn").classList.remove("hidden");
+        }
+
+        function restartGame() {
+            currentQuestionIndex = 0;
+            score = 0;
+            document.getElementById("quiz").classList.remove("hidden");
+            document.getElementById("score").classList.add("hidden");
+            document.getElementById("restartBtn").classList.add("hidden");
+            showQuestion();
+        }
+
+        // Initialize the first question
+        showQuestion();
+    </script>
+
+</body>
+</html>

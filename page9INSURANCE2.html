@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Insurance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-image: linear-gradient(-45deg, #4CAF50, #2E7D32, #2196F3, #1565C0);
+            background-size: 400% 400%;
+            animation: gradient 3s ease infinite;
+            color: white;
+            text-align: center;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background-color: rgba(0, 121, 107, 0.9);
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .container {
+            margin-top: 120px;
+            padding: 20px;
+        }
+
+        .insurance-form input, .insurance-form button {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .insurance-form input {
+            width: 250px;
+        }
+
+        .insurance-form button {
+            background-color: #FF9800;
+            color: white;
+            cursor: pointer;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+        }
+
+        .insurance-list {
+            margin-top: 20px;
+        }
+
+        .insurance-item {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            margin: 10px auto;
+            width: 50%;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .edit, .delete {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .edit { background-color: #2196F3; color: white; }
+        .delete { background-color: #E53935; color: white; }
+
+        .not-found {
+            color: red;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="BBlogo.png" alt="Insurance Advisor Logo">
+            <span>INSURANCE Advisor</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Manage Your Insurance</h1>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search insurance..." onkeyup="searchInsurance()">
+        </div>
+
+        <form class="insurance-form">
+            <input type="text" id="insuranceName" placeholder="Insurance Name" required>
+            <input type="text" id="insuranceDetails" placeholder="Details" required>
+            <input type="number" id="insuranceAmount" placeholder="Amount (INR)" required>
+            <input type="date" id="insuranceDate" required>
+            <button type="button" onclick="addInsurance()">Add Insurance</button>
+        </form>
+
+        <div class="insurance-list" id="insuranceList">
+            <div class="not-found" id="notFoundMessage" style="display:none;">No insurance found.</div>
+        </div>
+    </div>
+
+    <script>
+        function addInsurance() {
+            let name = document.getElementById("insuranceName").value;
+            let details = document.getElementById("insuranceDetails").value;
+            let amount = document.getElementById("insuranceAmount").value;
+            let date = document.getElementById("insuranceDate").value;
+            
+            if (name && details && amount && date) {
+                let list = document.getElementById("insuranceList");
+                let div = document.createElement("div");
+                div.classList.add("insurance-item");
+                
+                div.innerHTML = `<span>${name} - ${details} - ₹${amount} - ${date}</span>
+                                <button class="edit" onclick="editInsurance(this)">Edit</button>
+                                <button class="delete" onclick="deleteInsurance(this)">Delete</button>`;
+                
+                list.appendChild(div);
+                
+                document.getElementById("insuranceName").value = "";
+                document.getElementById("insuranceDetails").value = "";
+                document.getElementById("insuranceAmount").value = "";
+                document.getElementById("insuranceDate").value = "";
+
+                // Hide the "Not Found" message when a new insurance is added
+                document.getElementById("notFoundMessage").style.display = "none";
+            }
+        }
+
+        function editInsurance(button) {
+            let item = button.parentElement;
+            let text = item.querySelector("span").innerText;
+            let [name, details, amount, date] = text.split(" - ");
+            
+            document.getElementById("insuranceName").value = name;
+            document.getElementById("insuranceDetails").value = details;
+            document.getElementById("insuranceAmount").value = amount.replace('₹', '');
+            document.getElementById("insuranceDate").value = date;
+            
+            item.remove();
+        }
+
+        function deleteInsurance(button) {
+            button.parentElement.remove();
+            searchInsurance(); // Re-run search after deleting
+        }
+
+        function searchInsurance() {
+            let filter = document.getElementById("searchInput").value.toLowerCase();
+            let items = document.querySelectorAll(".insurance-item");
+            let found = false;
+
+            items.forEach(item => {
+                let text = item.querySelector("span").innerText.toLowerCase();
+                if (text.includes(filter)) {
+                    item.style.display = "flex"; // Show item if it matches
+                    found = true;
+                } else {
+                    item.style.display = "none"; // Hide item if it doesn't match
+                }
+            });
+
+            // Show "Not Found" message if no matches found
+            let notFoundMessage = document.getElementById("notFoundMessage");
+            if (!found) {
+                notFoundMessage.style.display = "block";
+            } else {
+                notFoundMessage.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

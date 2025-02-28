@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbox - Techno Titans</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #121212;
+            color: #e0e0e0;
+            text-align: center;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            background: #1e1e1e;
+            color: #f1c40f;
+            border: 2px solid #f1c40f;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .back-button:hover {
+            background: #f1c40f;
+            color: #121212;
+        }
+        .chat-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        .chat-box {
+            height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #2c2c2c;
+            border-radius: 10px;
+        }
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+            max-width: 75%;
+        }
+        .user-message {
+            background: #f1c40f;
+            color: #121212;
+            text-align: right;
+            margin-left: auto;
+        }
+        .bot-message {
+            background: #444;
+            text-align: left;
+            margin-right: auto;
+        }
+        .input-container {
+            display: flex;
+            margin-top: 20px;
+        }
+        .input-container input {
+            flex: 1;
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            border: 2px solid #f1c40f;
+            background: #1e1e1e;
+            color: #e0e0e0;
+        }
+        .input-container button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            background: #f1c40f;
+            color: #121212;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .input-container button:hover {
+            background: #e0a800;
+        }
+    </style>
+</head>
+<body>
+    <a href="TT.html" class="back-button">⬅ Back</a>
+    <h1 class="title">Techno Titans Chatbox</h1>
+    <div class="chat-container">
+        <div class="chat-box" id="chatBox">
+            <div class="message bot-message">Hello! How can I assist you today?</div>
+        </div>
+        <div class="input-container">
+            <input type="text" id="chatInput" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const inputField = document.getElementById("chatInput");
+            const chatBox = document.getElementById("chatBox");
+            const messageText = inputField.value.trim();
+            
+            if (messageText === "") return;
+            
+            const userMessage = document.createElement("div");
+            userMessage.classList.add("message", "user-message");
+            userMessage.textContent = messageText;
+            chatBox.appendChild(userMessage);
+            
+            inputField.value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            setTimeout(() => {
+                const botMessage = document.createElement("div");
+                botMessage.classList.add("message", "bot-message");
+
+                if (messageText.toLowerCase().includes("hello")) {
+                    botMessage.textContent = "Hi there! How can I help you today?";
+                } else if (messageText.toLowerCase().includes("how are you")) {
+                    botMessage.textContent = "I'm doing great, thanks for asking! How about you?";
+                } else if (messageText.toLowerCase().includes("techno titans")) {
+                    botMessage.textContent = "We are a team of tech enthusiasts exploring the latest in technology!";
+                } else if (messageText.toLowerCase().includes("who are you")) {
+                    botMessage.textContent = "I'm the Techno Titans chatbot, here to assist you!";
+                } else {
+                    botMessage.textContent = "Thank you for your message!";
+                }
+
+                chatBox.appendChild(botMessage);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

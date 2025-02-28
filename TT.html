@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TECHNOTITANS</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-image: url('teamwork.jpg'); /* Ensure you have this image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding-bottom: 50px;
+        }
+        header {
+            background-color: rgba(90, 108, 90, 0.7);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .logo {
+            width: 150px;
+            display: block;
+            margin: 20px auto;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Two columns on larger screens */
+            gap: 20px;
+            padding: 50px 20px;
+            justify-content: center;
+        }
+        .team-member {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #ffc107;
+        }
+        .team-member h3 {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        .team-member p {
+            font-size: 1em;
+            color: #555;
+        }
+        .team-member .role {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #ff9800;
+            margin-bottom: 10px;
+        }
+        .next {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            width: fit-content;
+            margin: 20px auto;
+        }
+        .next:hover {
+            background: #218838;
+        }
+        footer {
+            background-color: rgba(128, 130, 128, 0.7);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-container a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button-container a:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1><img src="LOGO.png!bw700" alt="TECHNOTITANS" class="logo" height="200"></h1>
+</header>
+
+<div class="team-container">
+    <div class="team-member">
+        <img src="TEJASS.jpg" alt="MR. TEJAS">
+        <h3>MR. TEJAS INGOLE</h3>
+    </div>
+    <div class="team-member">
+        <img src="SOFTY.jpg" alt="MS. Vaishnavi Dhopade">
+        <h3>MISS. VAISHNAVI DHIPADE</h3>
+    </div>
+    <div class="team-member">
+        <img src="PALAK.jpg" alt="Isha Urkude">
+        <h3>MISS. PALAK URKUDE</h3>
+    </div>
+</div>
+
+<div class="button-container">
+    <a href="page3MAIN.html">Home</a>
+    <a href="CHATBOX.html">Contact Us</a>
+</div>
+
+<footer>
+    <p>&copy; 2025 Foodbank. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

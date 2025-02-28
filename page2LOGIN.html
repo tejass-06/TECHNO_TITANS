@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUDGETBUDDY: AI Powered Finance Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #d7ffd9, #1b5e20);
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .animated-text {
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+            text-align: center;
+            width: 300px;
+        }
+        .logo {
+            width: 250px;
+            margin-bottom: 20px;
+            animation: logoBounce 2s infinite ease-in-out;
+        }
+        @keyframes logoBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            background: #fff;
+        }
+        button {
+            background: #1b5e20;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .links {
+            margin-top: 10px;
+        }
+        .links a {
+            color: #a5d6a7;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .popup-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 150, 0, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 150, 0, 0.5);
+            transition: opacity 1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container animated-text" id="form-container">
+        <img src="BBlogo.png" alt="BudgetBuddy Logo" class="logo">
+        <h1>BUDGETBUDDY</h1>
+        <p>"Let AI Handle the Numbers, You Live the Life."</p>
+        <div id="form-content">
+            <form>
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <input type="password" id="password" placeholder="Enter your password" required>
+                <button type="button" onclick="login()">Log In</button>
+            </form>
+            <div class="links">
+                <a onclick="showForgotPassword()">Forgot Password?</a> |
+                <a href="PROFILE.html">Create Account</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showForgotPassword() {
+            document.getElementById("form-content").innerHTML = `
+                <h2>Reset Password</h2>
+                <input type="email" id="reset-email" placeholder="Enter your email" required>
+                <button type="button" onclick="showPopup('Reset link sent!')">Send Reset Link</button>
+                <div class="links"><a onclick="showLoginForm()">Back to Login</a></div>
+            `;
+        }
+
+        function showLoginForm() {
+            document.getElementById("form-content").innerHTML = `
+                <form>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                    <button type="button" onclick="login()">Log In</button>
+                </form>
+                <div class="links">
+                    <a onclick="showForgotPassword()">Forgot Password?</a> |
+                    <a href="create_account.html">Create Account</a>
+                </div>
+            `;
+        }
+
+        function showPopup(message) {
+            let popup = document.createElement("div");
+            popup.className = "popup-message";
+            popup.innerText = message;
+            document.body.appendChild(popup);
+            setTimeout(() => {
+                popup.style.opacity = "0";
+                setTimeout(() => popup.remove(), 1000);
+            }, 1500);
+        }
+
+        function login() {
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            if (email.includes("@") && password.length >= 6) {
+                showPopup("Login successful!");
+                setTimeout(() => {
+                    window.location.href = "page3MAIN.html";
+                }, 2000);
+            } else {
+                showPopup("Invalid email or password!");
+            }
+        }
+    </script>
+</body>
+</html>

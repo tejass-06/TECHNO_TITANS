@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Buddy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(-45deg, #4CAF50, #2E7D32, #2196F3, #1565C0);
+            background-size: 400% 400%;
+            animation: gradient 5s ease infinite;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .taskbar {
+            width: 100%;
+            background-color: #00796b;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .taskbar .logo {
+            display: flex;
+            align-items: center;
+        }
+        .taskbar .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .taskbar .links {
+            display: flex;
+            gap: 20px;
+        }
+        .taskbar .links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .user-profile span {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .logo-container {
+            margin-top: 20px;
+            position: relative;
+            width: 250px;
+            animation: enter-logo 2s ease-out forwards, logoBounce 2s infinite ease-in-out;
+        }
+        .logo-container img {
+            width: 100%;
+        }
+
+        @keyframes enter-logo {
+            from { opacity: 0; transform: translateY(100%); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes logoBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .main-content {
+            text-align: center;
+            padding: 20px;
+        }
+        .main-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .box-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .box {
+            width: 200px;
+            height: 150px;
+            background-color: rgba(255, 255, 255, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .box a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="taskbar">
+        <div class="logo">
+            <img src="BBlogo.png" alt="Logo">
+            <span>Budget Buddy</span>
+        </div>
+        <div class="links">
+            <a href="home.html">Home</a>
+            <a href="TT.html" target="_blank">Contact Us</a>
+        </div>
+        <div class="user-profile" onclick="location.href='page13UPROFILE.html';">
+            <img src="UDP.jpg" alt="User Profile">
+            <span>MR. PRAJWAL</span>
+        </div>
+    </div>
+
+    <div class="logo-container">
+        <img src="BBlogo.png" alt="Large Budget Buddy Logo">
+    </div>
+
+    <div class="main-content">
+        <h1>BUDGETBUDDY</h1>
+        <div class="tagline">"Let AI Handle the Numbers, You Live the Life."</div>
+
+        <div class="box-container">
+            <div class="box"><a href="page4INCOME.html">INCOME DETAILS</a></div>
+            <div class="box"><a href="page5EXPENSES.html">EXPENSES DETAILS</a></div>
+            <div class="box"><a href="page6PSAVINGS.html">SAVINGS DETAILS</a></div>
+            <div class="box"><a href="page7INVEST.html">INVESTMENTS</a></div>
+            <div class="box"><a href="page9INSURANCE.html">INSURANCE</a></div>
+        </div>
+    </div>
+</body>
+</html>
